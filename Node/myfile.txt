@@ -1,0 +1,1 @@
+I can write to file using fs package in node
