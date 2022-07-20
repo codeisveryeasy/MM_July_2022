@@ -1,8 +1,11 @@
 var express = require('express')
 var mongoose = require('mongoose')
 var category = require('./category')
+var cors = require('cors')
 
 var app = express()
+app.use(cors())
+
 mongoose.set('debug', true)
 
 mongoose.connect("mongodb://localhost:27017/ecommerce")
@@ -22,9 +25,7 @@ app.get("/welcome", (request, response)=>{
     response.send("Welcome to express app!!!!")
 })
 
-app.listen(1234, ()=>{
-    console.log("Express app listening on port 1234!")
-})
+
 
 app.get('/get/category/all', (request, response)=>{
     category.find({}, (error, data)=>{
@@ -35,4 +36,8 @@ app.get('/get/category/all', (request, response)=>{
             response.json(data)
         }
     })
+})
+
+app.listen(1234, ()=>{
+    console.log("Express app listening on port 1234!")
 })
